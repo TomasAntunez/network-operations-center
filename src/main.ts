@@ -1,2 +1,11 @@
+import { Server } from "./presentation";
 
-console.log( 'running...' );
+
+( () => {
+  main();
+})();
+
+
+function main() {
+  Server.start();
+}
