@@ -3,16 +3,26 @@ import { existsSync, mkdirSync, writeFileSync, appendFileSync, readFileSync } fr
 import { LogDatasource } from "../../domain/datasources";
 import { LogEntity, LogSeverityLevel } from "../../domain/entities";
 
+import { LogsFilesLocationsEntity } from '../entities';
+
 
 export class FileSystemDatasource implements LogDatasource {
 
-  private readonly logsDirPath = 'logs';
-  private readonly allLogsFilePath = `${ this.logsDirPath }/logs-all.log`;
-  private readonly mediumLogsFilePath = `${ this.logsDirPath }/logs-medium.log`;
-  private readonly highLogsFilePath = `${ this.logsDirPath }/logs-high.log`;
+  private readonly logsDirPath: string;
+  private readonly allLogsFilePath: string;
+  private readonly mediumLogsFilePath: string;
+  private readonly highLogsFilePath: string;
 
 
-  constructor() {
+  constructor( logsFilesLocationsEntity: LogsFilesLocationsEntity ) {
+
+    const { logsDirPath, allLogsFileName, mediumLogsFileName, highLogsFileName } = logsFilesLocationsEntity;
+
+    this.logsDirPath = logsDirPath;
+    this.allLogsFilePath = `${ this.logsDirPath }/${ allLogsFileName }`;
+    this.mediumLogsFilePath = `${ this.logsDirPath }/${ mediumLogsFileName }`;
+    this.highLogsFilePath = `${ this.logsDirPath }/${ highLogsFileName }`;
+
     this.createLogsFiles();
   }
 

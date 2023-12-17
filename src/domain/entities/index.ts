@@ -1,2 +1,2 @@
 
-export { LogEntity, LogSeverityLevel } from './log.entity';
+export { LogEntity, LogSeverityLevel, LogEntityOptions } from './log.entity';

@@ -1,5 +1,4 @@
-// import { Server } from "./presentation";
-import { envs } from './config/plugins';
+import { Server } from "./presentation";
 
 
 ( () => {
@@ -8,6 +7,5 @@ import { envs } from './config/plugins';
 
 
 function main() {
-  // Server.start();
-  console.log( envs );
+  Server.start();
 }
