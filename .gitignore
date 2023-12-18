@@ -9,3 +9,4 @@
 # Private
 .env
 /mongo
+/postgres
