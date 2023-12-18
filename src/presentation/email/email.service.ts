@@ -1,9 +1,5 @@
 import { Transporter, SentMessageInfo, createTransport } from 'nodemailer';
 
-import { EmailService } from '../../domain/services';
-import { LogSeverityLevel } from '../../domain/entities';
-import { CreateLog } from '../../domain/use-cases/logs';
-
 import { envs } from '../../config/plugins';
 
 import { LogsFilesLocationsEntity } from '../../infrastructure/entities';
@@ -22,15 +18,12 @@ interface Attachment {
 }
 
 
-export class NodemailerEmailService implements EmailService {
+export class EmailService {
 
   private readonly transport = this.createTransport();
 
 
-  constructor(
-    private readonly logsFilesLocationsEntity: LogsFilesLocationsEntity,
-    private readonly createLog: CreateLog
-  ) {}
+  constructor( private readonly logsFilesLocationsEntity: LogsFilesLocationsEntity ) {}
 
 
   private createTransport(): Transporter<SentMessageInfo> {
@@ -50,7 +43,6 @@ export class NodemailerEmailService implements EmailService {
   private async sendEmail( options: SendEmailOptions ): Promise<boolean> {
 
     const { to, subject, htmlBody, attachments } = options;
-    const origin = EmailService.name;
 
     try {
       await this.transport.sendMail({
@@ -60,20 +52,9 @@ export class NodemailerEmailService implements EmailService {
         attachments,
       });
 
-      this.createLog.execute({
-        level: LogSeverityLevel.low,
-        message: 'Email sent',
-        origin,
-      });
-
       return true;
 
     } catch (error) {
-      this.createLog.execute({
-        level: LogSeverityLevel.high,
-        message: 'Email not sent',
-        origin,
-      });
 
       return false;
     }

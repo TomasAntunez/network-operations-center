@@ -1,2 +1,2 @@
 
-export { NodemailerEmailService } from './nodemailer-email.service';
+export { EmailService } from './email.service';

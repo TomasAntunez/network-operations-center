@@ -33,11 +33,16 @@ export class LogEntity {
 
 
   static fromJson( json: string ): LogEntity {
-    const options = JSON.parse(json) as Required<LogEntityOptions>;
+    const { level, message, origin, createdAt } = JSON.parse(json);
 
-    const log = new LogEntity(options);
+    return new LogEntity({ level, message, origin, createdAt });
+  }
 
-    return log;
+
+  static fromObject( object: { [key: string]: any } ): LogEntity {
+    const { message, level, createdAt, origin } = object;
+
+    return new LogEntity({ message, level, createdAt, origin });
   }
 
 }

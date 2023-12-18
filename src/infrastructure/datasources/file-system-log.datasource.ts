@@ -6,7 +6,7 @@ import { LogEntity, LogSeverityLevel } from "../../domain/entities";
 import { LogsFilesLocationsEntity } from '../entities';
 
 
-export class FileSystemDatasource implements LogDatasource {
+export class FileSystemLogDatasource implements LogDatasource {
 
   private readonly logsDirPath: string;
   private readonly allLogsFilePath: string;
@@ -46,7 +46,11 @@ export class FileSystemDatasource implements LogDatasource {
   private getLogsByPath( path: string ): LogEntity[] {
     const content = readFileSync( path, 'utf-8' );
 
-    const logs = content.split(/\n/).map( LogEntity.fromJson );
+    if ( content === '' ) return [];
+
+    const logs = content.split(/\n/)
+      .filter( log => log !== '' )
+      .map( LogEntity.fromJson );
 
     return logs;
   }
