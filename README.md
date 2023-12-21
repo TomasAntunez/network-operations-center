@@ -10,4 +10,6 @@
 
 4. Raise the databases with the command `docker compose up -d`
 
-5. Run `npm run dev`
+5. Run `npx prisma migrate dev`
+
+6. Run `npm run dev`

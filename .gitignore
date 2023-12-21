@@ -5,8 +5,14 @@
 # Output
 /dist
 /logs
+/coverage
 
 # Private
 .env
+.env.test
+
+# Databases
 /mongo
+/mongo-test
 /postgres
+/postgres-test
