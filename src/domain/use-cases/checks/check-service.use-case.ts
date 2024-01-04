@@ -1,5 +1,5 @@
 import { LogSeverityLevel } from "../../entities";
-import { CreateLog } from "../logs";
+import { CreateLogUseCase } from "../logs";
 
 
 interface CheckServiceUseCase {
@@ -13,7 +13,7 @@ type ErrorCallback = (( error: string ) => void) | undefined;
 export class CheckService implements CheckServiceUseCase {
 
   constructor(
-    private readonly createLog: CreateLog,
+    private readonly createLog: CreateLogUseCase,
     private readonly successCallback: SuccessCallback,
     private readonly errorCallback: ErrorCallback
   ) {}

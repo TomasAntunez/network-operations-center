@@ -2,7 +2,7 @@ import { LogEntityOptions, LogEntity } from '../../entities';
 import { LogRepository } from '../../repositories';
 
 
-interface CreateLogUseCase {
+export interface CreateLogUseCase {
   execute( options: LogEntityOptions ): Promise<void>;
 }
 

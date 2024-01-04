@@ -1,4 +1,4 @@
-import { connect } from 'mongoose';
+import { connect, connection } from 'mongoose';
 
 
 interface ConnectionOptions {
@@ -23,6 +23,10 @@ export class MongoDatabase {
       throw error;
     }
 
+  }
+
+  static async closeConnection() {
+    connection.close();
   }
 
 }
